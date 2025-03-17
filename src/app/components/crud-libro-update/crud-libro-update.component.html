@@ -1,0 +1,72 @@
+<div class="container">
+    <div class="mat-dialog-content" id="idFormModalidad">
+      <div class="row">
+        <mat-toolbar color="primary">
+          <span>Actualiza Libro</span>
+        </mat-toolbar>
+      </div>
+      <div class="row" style="margin-top: 3%">
+        <mat-form-field class="col-md-4">
+          <mat-label>Titulo</mat-label>
+          <input matInput [(ngModel)]="objLibro.titulo" />
+        </mat-form-field>
+        <mat-form-field class="col-md-4">
+          <mat-label>Año</mat-label>
+          <input matInput [(ngModel)]="objLibro.anio" />
+        </mat-form-field>
+        <mat-form-field class="col-md-4">
+          <mat-label>Serie</mat-label>
+          <input matInput [(ngModel)]="objLibro.serie" />
+        </mat-form-field>
+      </div>
+      <div class="row" style="margin-top: 3%">
+        <mat-form-field class="col-md-4">
+          <mat-label>Tipo Libro</mat-label>
+          <mat-select [(ngModel)]="objLibro.tipoLibro!.idDataCatalogo">
+            <mat-option value="-1"> [Seleccione] </mat-option>
+            <mat-option *ngFor="let y of lstTipoLibro" [value]="y.idDataCatalogo">
+              {{ y.descripcion }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="col-md-4">
+          <mat-label>Categoria Libro</mat-label>
+          <mat-select [(ngModel)]="objLibro.categoriaLibro!.idDataCatalogo">
+            <mat-option value="-1"> [Seleccione] </mat-option>
+            <mat-option
+              *ngFor="let y of lstCategoriaLibro"
+              [value]="y.idDataCatalogo"
+            >
+              {{ y.descripcion }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="col-md-4">
+          <mat-label>Estado Prestamo</mat-label>
+          <mat-select [(ngModel)]="objLibro.estadoPrestamo!.idDataCatalogo">
+            <mat-option value="-1"> [Seleccione] </mat-option>
+            <mat-option
+              *ngFor="let y of lstEstadoPrestamo"
+              [value]="y.idDataCatalogo"
+            >
+              {{ y.descripcion }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div mat-dialog-actions>
+        <button
+          mat-raised-button
+          type="submit"
+          (click)="actualizar()"
+          color="primary"
+          [mat-dialog-close]="1"
+        >
+          Actualiza
+        </button>
+        <button mat-button color="primary">Salir</button>
+      </div>
+       
+    </div>
+      
+  </div>

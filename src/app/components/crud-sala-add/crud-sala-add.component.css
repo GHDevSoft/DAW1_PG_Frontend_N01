@@ -1,0 +1,28 @@
+#cabecera{
+  background-color: rgb(22, 160, 133 );
+}
+#btnReg{
+  background-color: rgb(22, 160, 133 );
+  color: white;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    min-width: 900px;
+    min-height: 400px;
+  }
+  
+  .container > * {
+    width: 100%;
+  }
+  
+  .form {
+    display: flex;
+    padding-top: 6px;
+  }
+  
+  .mat-form-field {
+    font-size: 16px;
+    flex-grow: 1;
+  }

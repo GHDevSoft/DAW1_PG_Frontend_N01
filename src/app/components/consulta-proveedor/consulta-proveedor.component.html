@@ -1,0 +1,117 @@
+<app-menu></app-menu>
+<div class="container">
+
+        <div class="row">
+              <mat-toolbar color="primary" >    
+              <span>Consulta Proveedor</span>    
+              </mat-toolbar>  
+        </div>
+        <div  class="row"  style="margin-top: 3%">
+                <mat-form-field class="col-md-5">
+                    <mat-label>Razón Social</mat-label>
+                    <input  matInput [(ngModel)]="razonsocial">
+                </mat-form-field>
+                <mat-form-field class="col-md-5">
+                    <mat-label>RUC</mat-label>
+                    <input type="number" matInput  [(ngModel)]="ruc" >
+                </mat-form-field>
+                <div class="col-md-2" style="display: flex; align-items: center; justify-content: center">
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" 
+                                id="idEstado" name="estado"   [(ngModel)]="estado"/>         
+                        <label class="custom-control-label" for="idEstado">Estado</label>
+                    </div>   
+                </div>
+        </div>
+        <div  class="row"  style="margin-top: 3%">
+                <mat-form-field class="col-md-6">
+                    <mat-label>Celular</mat-label>
+                    <input  matInput [(ngModel)]="celular">
+                </mat-form-field>
+                <mat-form-field class="col-md-6">
+                    <mat-label>Nombre de contacto</mat-label>
+                    <input  matInput   [(ngModel)]="contacto">
+                </mat-form-field>
+                
+        </div>
+        
+        <div  class="row"  style="margin-top: 3%;">
+            <mat-form-field class="col-md-6">
+                <mat-label>País</mat-label>
+                <mat-select   [(ngModel)]="pais">
+                    <mat-option value="-1"> [Todos] </mat-option>
+                    <mat-option *ngFor="let x of lstPais" [value]="x.idPais">
+                      {{x.nombre}}
+                  </mat-option> 
+                </mat-select> 
+            </mat-form-field> 
+            <mat-form-field class="col-md-6">
+                <mat-label>Tipo Revista</mat-label>
+                <mat-select   [(ngModel)]="tipo">
+                    <mat-option value="-1"> [Todos] </mat-option>
+                    <mat-option *ngFor="let y of lstTipo" [value]="y.idDataCatalogo">
+                      {{y.descripcion}}
+                  </mat-option>
+                    
+                </mat-select> 
+            </mat-form-field>
+            
+        </div>
+        <div  class="row"  style="margin-top: 3%; display: flex; align-items: center; justify-content: center">
+               <button mat-raised-button type="button" color="primary" style="width: 150px;" (click)="consulta()" >Filtrar</button>
+        </div>
+
+        <div  class="row"  style="margin-top: 3%">
+
+           
+            <mat-table  #table  class="mat-cell" [dataSource]="dataSource" >
+                <ng-container matColumnDef="idProveedor">
+                  <mat-header-cell  mat-header-cell *matHeaderCellDef >Código</mat-header-cell>
+                  <mat-cell *matCellDef="let aux" >{{ aux.idProveedor  }}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="razonsocial">
+                    <mat-header-cell  mat-header-cell *matHeaderCellDef >Razón Social</mat-header-cell>
+                    <mat-cell *matCellDef="let aux" >{{ aux.razonsocial}}</mat-cell>
+                  </ng-container>
+                <ng-container matColumnDef="ruc">
+                  <mat-header-cell  mat-header-cell *matHeaderCellDef >RUC</mat-header-cell>
+                  <mat-cell *matCellDef="let aux" >{{ aux.ruc}}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="direccion">
+                  <mat-header-cell  mat-header-cell *matHeaderCellDef >Direccion</mat-header-cell>
+                  <mat-cell *matCellDef="let aux" >{{ aux.direccion}}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="telefono">
+                  <mat-header-cell  mat-header-cell *matHeaderCellDef >Télefono</mat-header-cell>
+                  <mat-cell *matCellDef="let aux" >{{ aux.telefono}}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="celular">
+                  <mat-header-cell  mat-header-cell *matHeaderCellDef >Celular</mat-header-cell>
+                  <mat-cell *matCellDef="let aux">{{ aux.celular }}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="contacto">
+                  <mat-header-cell  mat-header-cell *matHeaderCellDef >Contacto</mat-header-cell>
+                  <mat-cell *matCellDef="let aux">{{ aux.contacto }}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="estado">
+                  <mat-header-cell mat-header-cell *matHeaderCellDef>Estado</mat-header-cell>
+                  <mat-cell *matCellDef="let aux">{{ aux.estado == 1 ? "Activo" : "Inactivo" }}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="pais">
+                  <mat-header-cell  mat-header-cell *matHeaderCellDef >Pais</mat-header-cell>
+                  <mat-cell *matCellDef="let aux">{{ aux.pais.nombre }}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="tipo">
+                        <mat-header-cell  mat-header-cell *matHeaderCellDef >Tipo de Proveedor</mat-header-cell>
+                        <mat-cell *matCellDef="let aux">{{ aux.tipoProveedor.descripcion }}</mat-cell>
+                </ng-container>
+                
+
+              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+              <mat-row *matRowDef="let aux; columns: displayedColumns"></mat-row>
+          </mat-table>
+          <mat-paginator [pageSizeOptions]="[6,8,10]" showFirstLastButtons></mat-paginator>
+
+
+     </div>   
+</div>

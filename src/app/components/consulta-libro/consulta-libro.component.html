@@ -1,0 +1,91 @@
+<app-menu></app-menu>
+<div class="container">
+  <div class="row" style="width: 108%;margin-left: -40px;">
+    <mat-toolbar  style="background-color: #ff0707; color: #ffffff;">
+      <span class="text-white">Consulta de Libro</span>
+    </mat-toolbar>
+  </div>
+  <div class="row" style="margin-top: 3%">
+          <mat-form-field class="col-md-6">
+                  <mat-label>Titulo</mat-label>
+                  <input matInput [(ngModel)]="titulo">
+          </mat-form-field>
+
+  <div class="col-md-1" style="display: flex; align-items: center; justify-content: center">
+          <div class="custom-control custom-switch">
+          <input type="checkbox" class="custom-control-input" 
+                  id="idEstado" name="estado" [(ngModel)]="estado"/>         
+                  <label class="custom-control-label" for="idEstado">Estado</label>
+          </div>   
+          </div> 
+  </div>
+ 
+  <div  class="row"  style="margin-top: 3%">
+          
+  </div>
+  <div  class="row"  style="margin-top: 3%;">
+          <mat-form-field class="col-md-6">
+                  <mat-label>Tipo Libro</mat-label>
+                  <mat-select [(ngModel)]="tipo">
+                          <mat-option value="-1"> [Todos] </mat-option>
+                          <mat-option *ngFor="let x of lstTipoLibro" [value]="x.idDataCatalogo">
+                                  {{x.descripcion}}
+                          </mat-option>
+                  </mat-select>
+          </mat-form-field>
+          <mat-form-field class="col-md-6">
+                  <mat-label>Catogoria Libro</mat-label>
+                  <mat-select [(ngModel)]="categoria">
+                          <mat-option value="-1"> [Todos] </mat-option>
+                          <mat-option *ngFor="let x of lstCategoriaLibro" [value]="x.idDataCatalogo">
+                                  {{x.descripcion}}
+                          </mat-option>
+                  </mat-select>
+          </mat-form-field>
+  </div>
+  <div class="row justify-content-center">
+    <button mat-raised-button type="submit" style="background-color: #c72121; color: #ffffff;" (click)="consulta()">Consultar</button>
+</div>
+      <div class="row" style="margin-top: 3%">
+            
+        <mat-table  #table  class="mat-cell" [dataSource]="dataSource" >
+            <ng-container matColumnDef="idLibro">
+              <mat-header-cell  mat-header-cell *matHeaderCellDef >Código</mat-header-cell>
+              <mat-cell *matCellDef="let aux" >{{ aux.idLibro  }}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="titulo">
+                <mat-header-cell  mat-header-cell *matHeaderCellDef >Titulo</mat-header-cell>
+                <mat-cell *matCellDef="let aux" >{{ aux.titulo}}</mat-cell>
+              </ng-container>
+            <ng-container matColumnDef="anio">
+              <mat-header-cell  mat-header-cell *matHeaderCellDef >Año</mat-header-cell>
+              <mat-cell *matCellDef="let aux" >{{ aux.anio}}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="serie">
+              <mat-header-cell  mat-header-cell *matHeaderCellDef >Serie</mat-header-cell>
+              <mat-cell *matCellDef="let aux" >{{ aux.serie }}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="tipo">
+              <mat-header-cell  mat-header-cell *matHeaderCellDef >Tipo de Libro</mat-header-cell>
+              <mat-cell *matCellDef="let aux">{{ aux.tipoLibro.descripcion }}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="categoria">
+              <mat-header-cell  mat-header-cell *matHeaderCellDef >Categoria Libro</mat-header-cell>
+              <mat-cell *matCellDef="let aux">{{ aux.categoriaLibro.descripcion }}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="prestamo">
+              <mat-header-cell  mat-header-cell *matHeaderCellDef >Estado Prestamo</mat-header-cell>
+              <mat-cell *matCellDef="let aux">{{ aux.estadoPrestamo.descripcion }}</mat-cell>
+            </ng-container> 
+            <ng-container matColumnDef="estado">
+              <th mat-header-cell *matHeaderCellDef>Estado</th>
+              <td mat-cell *matCellDef="let aux" style="vertical-align: middle;">
+                {{ aux.estado == 1 ? "Activo" : "Inactivo" }}
+              </td>
+            </ng-container>   
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let aux; columns: displayedColumns"></mat-row>
+      </mat-table>
+      <mat-paginator [pageSizeOptions]="[6,8,10]" showFirstLastButtons></mat-paginator>
+ </div>   
+    </div>
